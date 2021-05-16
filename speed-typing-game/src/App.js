@@ -1,12 +1,12 @@
 import Header from './Components/Header/Header'
-import TypingArea from './Components/TypingArea/TypingArea'
+import Form from './Components/Form/Form'
 import './App.scss'
 
 const App = () => {
   return (
     <div className="container">
       <Header/>
-      <TypingArea/>
+      <Form/>
       <Header/>
     </div>
   )
