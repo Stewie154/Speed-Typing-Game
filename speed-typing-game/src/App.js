@@ -3,6 +3,8 @@ import './App.scss'
 
 const App = () => {
   const [text, setText] = useState('')
+  const [wordCount, setWordCount] = useState()
+  const [timeRemaining, setTimeRemaining] = useState(5)
 
   const handleChange = (event) => {
     event.preventDefault()
@@ -10,12 +12,17 @@ const App = () => {
     setText(newText)
   }
 
+  const countWords = () => {
+    let total = text.trim().split(' ').length
+    console.log(total)
+  }
+
   return (
     <div className="container">
       <header>How Fast Can You Type!?</header>
       <textarea onChange={handleChange} value={text} name="" id=""/>
-      <h2>Time Remaining: ???</h2>
-      <button className="btn">Start</button>
+      <h2>Seconds Remaining: {timeRemaining}</h2>
+      <button className="btn" onClick={() => countWords()}>Start</button>
     </div>
   )
 }
