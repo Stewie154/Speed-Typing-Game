@@ -3,7 +3,7 @@ import './App.scss'
 
 const App = () => {
   const [text, setText] = useState('')
-  const [wordCount, setWordCount] = useState()
+  const [wordCount, setWordCount] = useState(0)
   const [timeRemaining, setTimeRemaining] = useState(5)
 
   const handleChange = (event) => {
@@ -14,7 +14,8 @@ const App = () => {
 
   const countWords = () => {
     let total = text.trim().split(' ').length
-    console.log(total)
+    // console.log(total)
+    setWordCount(total)
   }
 
   return (
@@ -23,6 +24,7 @@ const App = () => {
       <textarea onChange={handleChange} value={text} name="" id=""/>
       <h2>Seconds Remaining: {timeRemaining}</h2>
       <button className="btn" onClick={() => countWords()}>Start</button>
+      <h2>Your Word Count: {wordCount}</h2>
     </div>
   )
 }
