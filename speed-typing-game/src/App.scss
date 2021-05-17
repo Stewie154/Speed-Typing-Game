@@ -8,6 +8,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: $backgroundColor;
+  color: $fontMain;
 
   .container {
     display: flex;
@@ -15,10 +16,62 @@ body {
     justify-content: space-around;
     align-items: center;
     width: 80vw;
-    min-height: 500px;
+    max-width: 1000px;
+    min-height: 700px;
     background-color: $containerColor;
     border: 3px solid $border;
     border-radius: 10px;
+
+    header {
+      font-size: 35px;
+      padding: 20px;
+      text-decoration: underline;
+      text-align: center;
+      letter-spacing: 1px;
+      font-family: $fontFamily;
+    }
+
+
+    textarea {
+      width: 80%;
+      min-height: 400px;
+      background-color: $backgroundColor;
+      color: $fontMain;
+      font-family: $fontFamily;
+      line-height: 20px;
+      letter-spacing: 2px;
+      padding: 10px
+    }
+
+    h2 {
+      font-family: $fontFamily;
+      letter-spacing: 2px;
+      padding: 10px;
+    }
+  
+    .btn {
+        background-color: $btnColor;
+        width: 20%;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #fff;
+        color: $containerColor;
+        opacity: 1;
+        font-size: 30px;
+        margin: 10px;
+        cursor: pointer;
+        transition: 0.4s ease;
+        &:hover {
+            opacity: 0.4;
+        }
+    }
+
   }
 }
+
+
+
+
+
+
 

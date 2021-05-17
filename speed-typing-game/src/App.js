@@ -1,13 +1,13 @@
-import Header from './Components/Header/Header'
-import Form from './Components/Form/Form'
+
 import './App.scss'
 
 const App = () => {
   return (
     <div className="container">
-      <Header/>
-      <Form/>
-      <Header/>
+      <header>How Fast Can You Type!?</header>
+      <textarea name="" id=""/>
+      <h2>Time Remaining: ???</h2>
+      <button className="btn">Start</button>
     </div>
   )
 }
