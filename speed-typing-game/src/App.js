@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import './App.scss'
+import './Global/variables.scss'
 
 const App = () => {
   const [text, setText] = useState('')
@@ -17,7 +18,6 @@ const App = () => {
     else if (timeRemaining === 0) {
       setGameOn(false)
       countWords()
-      setTimeRemaining(5)
     }
   }, [timeRemaining, gameOn])
 
@@ -34,6 +34,7 @@ const App = () => {
   }
 
   const startGame = () => {
+    setTimeRemaining(5)
     textAreaRef.current.focus()
     setText('')
     setWordCount(0)
@@ -52,9 +53,14 @@ const App = () => {
         ref={textAreaRef}
       
       />
-      <h2>Seconds Remaining: {timeRemaining}</h2>
+      <h2>
+        Seconds Remaining: 
+        <span style={timeRemaining <= 3 ? { color: 'red' } : { color: 'rgb(16, 189, 16)' }}>
+          {timeRemaining}
+        </span>
+      </h2>
       <button disabled={gameOn ? true : false} className="btn" onClick={startGame}>Start</button>
-      <h2>Your Word Count: {wordCount}</h2>
+      <h2>Your Word Count: <span className="red">{wordCount}</span></h2>
     </div>
   )
 }
