@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import './App.scss'
 
 const App = () => {
@@ -6,6 +6,7 @@ const App = () => {
   const [wordCount, setWordCount] = useState(0)
   const [timeRemaining, setTimeRemaining] = useState(5)
   const [gameOn, setGameOn] = useState(false)
+  const textAreaRef = useRef()
 
   useEffect( () => {
     if (timeRemaining > 0 && gameOn) {
@@ -33,15 +34,24 @@ const App = () => {
   }
 
   const startGame = () => {
+    textAreaRef.current.focus()
     setText('')
     setWordCount(0)
     setGameOn(true)
+    textAreaRef.current.disabled = false
+    textAreaRef.current.focus()
   }
 
   return (
     <div className="container">
       <header>How Fast Can You Type!?</header>
-      <textarea disabled={gameOn ? false : true} onChange={handleChange} value={text} name="" id=""/>
+      <textarea 
+        disabled={gameOn ? false : true} 
+        onChange={handleChange} 
+        value={text} 
+        ref={textAreaRef}
+      
+      />
       <h2>Seconds Remaining: {timeRemaining}</h2>
       <button disabled={gameOn ? true : false} className="btn" onClick={startGame}>Start</button>
       <h2>Your Word Count: {wordCount}</h2>

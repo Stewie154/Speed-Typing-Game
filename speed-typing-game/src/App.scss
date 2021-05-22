@@ -44,6 +44,15 @@ body {
       padding: 10px;
       //I want this border only when typing
       // border: 1px solid $fontMain;
+      &:focus {
+        box-shadow: none;
+        border: 1px solid $fontMain;
+        overflow: auto;
+        outline: none;
+        border-radius: 3px;
+      }
+
+      
       &:disabled {
         background-color: $disabledColor;
       }
