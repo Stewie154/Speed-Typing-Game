@@ -44,6 +44,9 @@ body {
       padding: 10px;
       //I want this border only when typing
       // border: 1px solid $fontMain;
+      &:disabled {
+        background-color: $disabledColor;
+      }
     }
 
     h2 {
@@ -64,8 +67,12 @@ body {
         margin: 10px;
         cursor: pointer;
         transition: 0.4s ease;
-        &:hover {
+        &:hover:enabled {
             opacity: 0.4;
+        }
+        &:disabled {
+          background-color: $disabledColor;
+          cursor: not-allowed;
         }
     }
 

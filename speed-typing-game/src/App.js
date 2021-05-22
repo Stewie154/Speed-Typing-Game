@@ -15,6 +15,7 @@ const App = () => {
     }
     else if (timeRemaining === 0) {
       setGameOn(false)
+      countWords()
       setTimeRemaining(5)
     }
   }, [timeRemaining, gameOn])
@@ -32,15 +33,17 @@ const App = () => {
   }
 
   const startGame = () => {
+    setText('')
+    setWordCount(0)
     setGameOn(true)
   }
 
   return (
     <div className="container">
       <header>How Fast Can You Type!?</header>
-      <textarea onChange={handleChange} value={text} name="" id=""/>
+      <textarea disabled={gameOn ? false : true} onChange={handleChange} value={text} name="" id=""/>
       <h2>Seconds Remaining: {timeRemaining}</h2>
-      <button className="btn" onClick={startGame}>Start</button>
+      <button disabled={gameOn ? true : false} className="btn" onClick={startGame}>Start</button>
       <h2>Your Word Count: {wordCount}</h2>
     </div>
   )
