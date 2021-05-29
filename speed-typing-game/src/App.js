@@ -2,7 +2,8 @@ import React, {useState, useEffect, useRef} from 'react'
 import { IoIosArrowDropupCircle, IoIosArrowDropdownCircle } from 'react-icons/io'
 import './App.scss'
 import './Global/variables.scss'
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const App = () => {
   const [text, setText] = useState('')
   const [wordCount, setWordCount] = useState(0)
@@ -22,6 +23,12 @@ const App = () => {
       countWords()
     }
   }, [timeRemaining, gameOn])
+
+  useEffect(() => {
+    AOS.init({
+      duration : 1500
+    });
+  }, []);
 
   const handleChange = (event) => {
     event.preventDefault()
@@ -59,7 +66,7 @@ const App = () => {
   const timerText = gameOn ? 'Seconds Remaining: ' : 'Set timer (seconds) : '
 
   return (
-    <div className="container">
+    <div className="container" data-aos="fade-down">
       <header>How Fast Can You Type!?</header>
       <textarea 
         disabled={gameOn ? false : true} 
@@ -86,7 +93,7 @@ const App = () => {
       </div>
       
       <button disabled={gameOn ? true : false} className="btn" onClick={startGame}>{playCount > 0 ? 'Play Again' : 'Start Game'}</button>
-      <h2>Your Word Count: <span className="red">{wordCount}</span></h2>
+      <h2>Your Word Count: <span className="red">{playCount > 0 ? wordCount : '???'}</span></h2>
     </div>
   )
 }
