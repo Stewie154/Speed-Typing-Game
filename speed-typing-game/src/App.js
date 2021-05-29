@@ -8,6 +8,7 @@ const App = () => {
   const [text, setText] = useState('')
   const [wordCount, setWordCount] = useState(0)
   const [timeRemaining, setTimeRemaining] = useState(0)
+  const [countDown, setCountDown] = useState(3)
   const [gameOn, setGameOn] = useState(false)
   const [playCount, setPlayCount] = useState(0)
   const textAreaRef = useRef()
@@ -83,11 +84,11 @@ const App = () => {
           </span>
         </h2>
         <IoIosArrowDropupCircle 
-          className="arrow"
+          className={`arrow ${gameOn && 'hide'}`}
           onClick={incrementTimer}
         />
         <IoIosArrowDropdownCircle 
-          className="arrow"
+          className={`arrow ${gameOn && 'hide'}`}
           onClick={decrementTimer}
         />
       </div>
