@@ -73,6 +73,24 @@ body {
       letter-spacing: 2px;
       padding: 10px;
     }
+
+    .timer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $backgroundColor;
+      .arrow {
+        font-size: 50px;
+        padding: 0 5px;
+        color: $btnColor;
+        cursor: pointer;
+        transition: 0.4s ease;
+        &:hover {
+          color: orange;
+        }
+      }
+    }
   
     .btn {
         background-color: $btnColor;

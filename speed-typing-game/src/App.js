@@ -1,12 +1,14 @@
 import React, {useState, useEffect, useRef} from 'react'
+import { IoIosArrowDropupCircle, IoIosArrowDropdownCircle } from 'react-icons/io'
 import './App.scss'
 import './Global/variables.scss'
 
 const App = () => {
   const [text, setText] = useState('')
   const [wordCount, setWordCount] = useState(0)
-  const [timeRemaining, setTimeRemaining] = useState(5)
+  const [timeRemaining, setTimeRemaining] = useState(0)
   const [gameOn, setGameOn] = useState(false)
+  const [playCount, setPlayCount] = useState(0)
   const textAreaRef = useRef()
 
   useEffect( () => {
@@ -33,15 +35,28 @@ const App = () => {
     setWordCount(total)
   }
 
+  const incrementTimer = () => {
+    setTimeRemaining(prevTime => prevTime + 5)
+  }
+  const decrementTimer = () => {
+    setTimeRemaining(prevTime => prevTime > 0 ? prevTime - 5 : 0)
+  }
+
   const startGame = () => {
-    setTimeRemaining(5)
+    if (timeRemaining < 1) {
+      alert('You must set your time before starting!')
+      return
+    }
     textAreaRef.current.focus()
     setText('')
     setWordCount(0)
     setGameOn(true)
+    setPlayCount(playCount + 1)
     textAreaRef.current.disabled = false
     textAreaRef.current.focus()
   }
+
+  const timerText = gameOn ? 'Seconds Remaining: ' : 'Set timer (seconds) : '
 
   return (
     <div className="container">
@@ -53,13 +68,24 @@ const App = () => {
         ref={textAreaRef}
       
       />
-      <h2>
-        Seconds Remaining: 
-        <span style={timeRemaining <= 3 ? { color: 'red' } : { color: 'rgb(16, 189, 16)' }}>
-          {timeRemaining}
-        </span>
-      </h2>
-      <button disabled={gameOn ? true : false} className="btn" onClick={startGame}>Start</button>
+      <div className="timer" style={gameOn ? {backgroundColor: 'green'} : {backgroundColor: 'rgb(10, 10, 10)'}}>
+        <h2>
+          {timerText}
+          <span style={timeRemaining <= 3 ? { color: 'red' } : { color: 'rgb(16, 189, 16)' }}>
+            {timeRemaining}
+          </span>
+        </h2>
+        <IoIosArrowDropupCircle 
+          className="arrow"
+          onClick={incrementTimer}
+        />
+        <IoIosArrowDropdownCircle 
+          className="arrow"
+          onClick={decrementTimer}
+        />
+      </div>
+      
+      <button disabled={gameOn ? true : false} className="btn" onClick={startGame}>{playCount > 0 ? 'Play Again' : 'Start Game'}</button>
       <h2>Your Word Count: <span className="red">{wordCount}</span></h2>
     </div>
   )
