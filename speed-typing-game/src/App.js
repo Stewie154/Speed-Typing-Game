@@ -15,10 +15,9 @@ const App = () => {
    ]
 
   const [text, setText] = useState('')
-  const [targetText, setTargetText] = useState(textSamples[0])
+  const [targetText, setTargetText] = useState(textSamples[Math.floor(Math.random() * textSamples.length)])
   const [wordCount, setWordCount] = useState(0)
   const [timeRemaining, setTimeRemaining] = useState(0)
-  const [countDown, setCountDown] = useState(3)
   const [gameOn, setGameOn] = useState(false)
   const [playCount, setPlayCount] = useState(0)
   const textAreaRef = useRef()
