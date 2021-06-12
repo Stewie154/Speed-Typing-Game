@@ -1,11 +1,19 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { IoIosArrowDropupCircle, IoIosArrowDropdownCircle } from 'react-icons/io'
+import { FiRefreshCcw } from 'react-icons/fi'
 import './App.scss'
 import './Global/variables.scss'
 import AOS from "aos";
 import "aos/dist/aos.css";
 const App = () => {
+
+  const textSamples = [
+    "Yo, his palms are sweaty, knees weak, arms are heavy. There's vomit on his sweater already, mom's spaghetti he's nervous. But on the surface he looks calm and ready to drop bombs, but he keeps on forgetting.",
+    "What he wrote down, the whole crowd goes so loud. What he wrote down, the whole crowd goes so loud. What he wrote down, the whole crowd goes so loud. What he wrote down, the whole crowd goes so loud. What he wrote down, the whole crowd goes so loud. What he wrote down, the whole crowd goes so loud."
+   ]
+   
   const [text, setText] = useState('')
+  const [targetText, setTargetText] = useState(textSamples[0])
   const [wordCount, setWordCount] = useState(0)
   const [timeRemaining, setTimeRemaining] = useState(0)
   const [countDown, setCountDown] = useState(3)
@@ -30,6 +38,10 @@ const App = () => {
       duration : 1500
     });
   }, []);
+
+  const changeTargetText = () => {
+    console.log('linked')
+  }
 
   const handleChange = (event) => {
     event.preventDefault()
@@ -66,9 +78,23 @@ const App = () => {
 
   const timerText = gameOn ? 'Seconds Remaining: ' : 'Set timer (seconds) : '
 
+
   return (
     <div className="container" data-aos="fade-down">
+
       <header>How Fast Can You Type!?</header>
+      
+      <div className="target">
+        <section className="text">
+          <p>{targetText}</p>
+        </section>
+        {!gameOn && 
+          <section className="refresh">
+            <FiRefreshCcw onClick={changeTargetText} />
+          </section>
+        }
+      </div>
+
       <textarea 
         disabled={gameOn ? false : true} 
         onChange={handleChange} 
@@ -76,6 +102,7 @@ const App = () => {
         ref={textAreaRef}
       
       />
+
       <div className="timer" style={gameOn ? {backgroundColor: 'green'} : {backgroundColor: 'rgb(10, 10, 10)'}}>
         <h2>
           {timerText}
@@ -95,6 +122,7 @@ const App = () => {
       
       <button disabled={gameOn ? true : false} className="btn" onClick={startGame}>{playCount > 0 ? 'Play Again' : 'Start Game'}</button>
       <h2>Your Word Count: <span className="red">{playCount > 0 ? wordCount : '???'}</span></h2>
+
     </div>
   )
 }

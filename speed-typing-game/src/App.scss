@@ -31,6 +31,46 @@ body {
       font-family: $fontFamily;
     }
 
+    .target {
+      width: 80%;
+      min-height: 100px;
+      display: flex;
+      justify-content: center;
+      background-color: $targetBackground;
+      margin-bottom: 20px;
+
+      .text {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          padding: 10px;
+          color: white;
+          font-size: 22px;  
+          text-align: center;
+        }
+
+      }
+
+
+      .refresh {
+        background-color: $refreshBackground;
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 35px;
+        cursor: pointer;
+        transition: 0.2s ease;
+        &:hover {
+          color: orange;
+        }
+
+      }
+    }
+
     span {
       font-family: $fontFamily;
       letter-spacing: 2px;
