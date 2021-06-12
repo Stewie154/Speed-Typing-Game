@@ -42,9 +42,9 @@ const App = () => {
   }, []);
 
   const changeTargetText = () => {
-    console.log('linked')
-    let randomNum = Math.floor(Math.random() * textSamples.length)
-    setTargetText(textSamples[randomNum])
+    let removedCurrent = textSamples.filter(text => text != targetText)
+    let randomNum = Math.floor(Math.random() * removedCurrent.length)
+    setTargetText(removedCurrent[randomNum])
   }
 
   const handleChange = (event) => {
