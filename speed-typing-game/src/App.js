@@ -9,9 +9,11 @@ const App = () => {
 
   const textSamples = [
     "Yo, his palms are sweaty, knees weak, arms are heavy. There's vomit on his sweater already, mom's spaghetti he's nervous. But on the surface he looks calm and ready to drop bombs, but he keeps on forgetting.",
-    "What he wrote down, the whole crowd goes so loud. What he wrote down, the whole crowd goes so loud. What he wrote down, the whole crowd goes so loud. What he wrote down, the whole crowd goes so loud. What he wrote down, the whole crowd goes so loud. What he wrote down, the whole crowd goes so loud."
+    "What he wrote down, the whole crowd goes so loud. He opens his mouth but the words won't come out. He's chokin', how everybody's jokin' now. The clock's run out, time's up over bloah.",
+    "Is this the real life? Is this just fantasy? Caught in a landslide, no escape from reality. Open your eyes, Look up to the skies and see.",
+    "I'm just a poor boy, I need no sympathy, because I'm easy come, easy go, little high, little low. Any way the wind blows doesn't really matter to me, to me."
    ]
-   
+
   const [text, setText] = useState('')
   const [targetText, setTargetText] = useState(textSamples[0])
   const [wordCount, setWordCount] = useState(0)
@@ -41,6 +43,8 @@ const App = () => {
 
   const changeTargetText = () => {
     console.log('linked')
+    let randomNum = Math.floor(Math.random() * textSamples.length)
+    setTargetText(textSamples[randomNum])
   }
 
   const handleChange = (event) => {
