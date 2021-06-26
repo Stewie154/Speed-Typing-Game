@@ -53,6 +53,18 @@ body {
           line-height: 25px;
         }
 
+        .red {
+          color: red;
+        }
+
+        .green {
+          color: $btnColor;
+        }
+
+        .current {
+          color: blue;
+        }
+
       }
 
 

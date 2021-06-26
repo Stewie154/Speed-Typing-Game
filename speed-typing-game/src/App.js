@@ -17,7 +17,7 @@ const App = () => {
   const [text, setText] = useState('')
   const [targetText, setTargetText] = useState(textSamples[Math.floor(Math.random() * textSamples.length)])
   const [wordCount, setWordCount] = useState(0)
-  const [timeRemaining, setTimeRemaining] = useState(0)
+  const [timeRemaining, setTimeRemaining] = useState(30)
   const [gameOn, setGameOn] = useState(false)
   const [playCount, setPlayCount] = useState(0)
   const textAreaRef = useRef()
@@ -46,10 +46,34 @@ const App = () => {
     setTargetText(removedCurrent[randomNum])
   }
 
+  const updateTargetTextDisplay = () => {
+
+    let displayText = targetText.split('').map((letter, key) => {
+
+      let color
+
+      if (key < text.length) {
+        color = letter === text[key] ? 'green' : 'red'
+        return (
+          <span className={`letter ${color}`}>{letter}</span>
+        )
+      } else {
+          return (
+          <span className={`letter`}>{letter}</span>
+        )
+      }
+
+    })
+
+    return displayText
+  }
+
   const handleChange = (event) => {
     event.preventDefault()
     let newText = event.target.value
     setText(newText)
+    
+    
   }
 
   const countWords = () => {
@@ -81,6 +105,8 @@ const App = () => {
 
   const timerText = gameOn ? 'Seconds Remaining: ' : 'Set timer (seconds) : '
 
+  
+
 
   return (
     <div className="container" data-aos="fade-down">
@@ -89,11 +115,7 @@ const App = () => {
       
       <div className="target">
         <section className="text">
-          <p>{targetText.split('').map(letter => {
-            return (
-              <span className="letter">{letter}</span>
-            )
-          })}</p>
+          <p>{updateTargetTextDisplay()}</p>
         </section>
         {!gameOn && 
           <section className="refresh">
