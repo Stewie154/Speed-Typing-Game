@@ -45,11 +45,12 @@ body {
         justify-content: center;
         align-items: center;
 
-        p {
-          padding: 10px;
+        .letter {
           color: white;
-          font-size: 22px;  
+          font-size: 15px;  
           text-align: center;
+          padding: 0px;
+          line-height: 25px;
         }
 
       }

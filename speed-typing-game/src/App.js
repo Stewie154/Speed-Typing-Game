@@ -89,7 +89,11 @@ const App = () => {
       
       <div className="target">
         <section className="text">
-          <p>{targetText}</p>
+          <p>{targetText.split('').map(letter => {
+            return (
+              <span className="letter">{letter}</span>
+            )
+          })}</p>
         </section>
         {!gameOn && 
           <section className="refresh">
