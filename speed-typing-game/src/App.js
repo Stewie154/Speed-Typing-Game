@@ -17,7 +17,8 @@ const App = () => {
   const [text, setText] = useState('')
   const [targetText, setTargetText] = useState(textSamples[Math.floor(Math.random() * textSamples.length)])
   const [wordCount, setWordCount] = useState(0)
-  const [timeRemaining, setTimeRemaining] = useState(30)
+  const [accuracy, setAccuracy] = useState(0)
+  const [timeRemaining, setTimeRemaining] = useState(0)
   const [gameOn, setGameOn] = useState(false)
   const [playCount, setPlayCount] = useState(0)
   const textAreaRef = useRef()
@@ -77,9 +78,18 @@ const App = () => {
   }
 
   const countWords = () => {
-    let total = text.trim().split(' ').length
-    // console.log(total)
-    setWordCount(total)
+    let score = 0
+    let wordsAttempted = text.trim().split(' ')
+    let comparison = targetText.split(' ').slice(0, wordsAttempted.length) 
+    
+    for (let i = 0; i < wordsAttempted.length; i++) {
+      if (wordsAttempted[i] === comparison[i]) {
+        score ++
+      }
+    }
+
+    setWordCount(wordsAttempted.length)
+    setAccuracy( Math.round(score / wordsAttempted.length * 100) )
   }
 
   const incrementTimer = () => {
@@ -150,7 +160,11 @@ const App = () => {
       </div>
       
       <button disabled={gameOn ? true : false} className="btn" onClick={startGame}>{playCount > 0 ? 'Play Again' : 'Start Game'}</button>
-      <h2>Your Word Count: <span className="red">{playCount > 0 ? wordCount : '???'}</span></h2>
+
+      {!gameOn & playCount > 0 &&
+        <h2>You Typed: <span className="red">{wordCount}</span> words with <span>%{accuracy}</span> Accuracy</h2> 
+      }
+      
 
     </div>
   )
