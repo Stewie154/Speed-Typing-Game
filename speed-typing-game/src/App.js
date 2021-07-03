@@ -11,15 +11,16 @@ const App = () => {
     "Yo, his palms are sweaty, knees weak, arms are heavy. There's vomit on his sweater already, mom's spaghetti he's nervous. But on the surface he looks calm and ready to drop bombs, but he keeps on forgetting.",
     "What he wrote down, the whole crowd goes so loud. He opens his mouth but the words won't come out. He's chokin', how everybody's jokin' now. The clock's run out, time's up over bloah.",
     "Is this the real life? Is this just fantasy? Caught in a landslide, no escape from reality. Open your eyes, Look up to the skies and see.",
-    "I'm just a poor boy, I need no sympathy, because I'm easy come, easy go, little high, little low. Any way the wind blows doesn't really matter to me, to me."
+    "I'm just a poor boy, I need no sympathy, because I'm easy come, easy go, little high, little low. Any way the wind blows doesn't really matter to me, to me.",
+    "hello."
    ]
 
   const [text, setText] = useState('')
   const [targetText, setTargetText] = useState(textSamples[Math.floor(Math.random() * textSamples.length)])
   const [wordCount, setWordCount] = useState(0)
   const [correctWords, setCorrectWords] = useState(0)
-  const [accuracy, setAccuracy] = useState(0)
   const [timeRemaining, setTimeRemaining] = useState(0)
+  const [leftOverTime, setLeftOverTime] = useState(0)
   const [gameOn, setGameOn] = useState(false)
   const [playCount, setPlayCount] = useState(0)
   const textAreaRef = useRef()
@@ -75,6 +76,11 @@ const App = () => {
     event.preventDefault()
     let newText = event.target.value
     setText(newText)
+    if(text.length === targetText.length) {
+      let timeLeft = timeRemaining
+      setLeftOverTime(timeLeft)
+      endGameEarly()
+    }
   }
 
   const countWords = () => {
@@ -114,6 +120,11 @@ const App = () => {
     setPlayCount(playCount + 1)
     textAreaRef.current.disabled = false
     textAreaRef.current.focus()
+  }
+
+  const endGameEarly = () => {
+    setGameOn(false)
+    countWords()
   }
 
   const timerText = gameOn ? 'Seconds Remaining: ' : 'Set timer (seconds) : '
@@ -164,8 +175,8 @@ const App = () => {
       
       <button disabled={gameOn ? true : false} className="btn" onClick={startGame}>{playCount > 0 ? 'Play Again' : 'Start Game'}</button>
 
-      {!gameOn & playCount > 0 &&
-        <h2 className="result-message">You attempted <span>{wordCount}</span> words and spelled <span>{correctWords}</span> of them correctly!</h2> 
+      {!gameOn & playCount != 0 &&
+        <h2 className="result-message">You attempted <span>{wordCount}</span> words {leftOverTime != 0 && <span>(with {leftOverTime} seconds to spare!)</span>} and spelled <span>{correctWords}</span> of them correctly!</h2> 
       }
       
 
