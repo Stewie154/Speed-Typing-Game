@@ -170,6 +170,18 @@ body {
         }
     }
 
+    .result-message {
+      color: $resultText;
+      text-align: center;
+      line-height: 40px;
+      padding: 20px;
+      background-color: rgb(24, 24, 31);
+
+      span {
+        color: orangered;
+      }
+    }
+
   }
 }
 

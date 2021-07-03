@@ -17,6 +17,7 @@ const App = () => {
   const [text, setText] = useState('')
   const [targetText, setTargetText] = useState(textSamples[Math.floor(Math.random() * textSamples.length)])
   const [wordCount, setWordCount] = useState(0)
+  const [correctWords, setCorrectWords] = useState(0)
   const [accuracy, setAccuracy] = useState(0)
   const [timeRemaining, setTimeRemaining] = useState(0)
   const [gameOn, setGameOn] = useState(false)
@@ -42,6 +43,7 @@ const App = () => {
   }, []);
 
   const changeTargetText = () => {
+    setText('')
     let removedCurrent = textSamples.filter(text => text != targetText)
     let randomNum = Math.floor(Math.random() * removedCurrent.length)
     setTargetText(removedCurrent[randomNum])
@@ -73,8 +75,6 @@ const App = () => {
     event.preventDefault()
     let newText = event.target.value
     setText(newText)
-    
-    
   }
 
   const countWords = () => {
@@ -87,9 +87,12 @@ const App = () => {
         score ++
       }
     }
+    console.log(wordsAttempted.length)
+    console.log(score)
 
     setWordCount(wordsAttempted.length)
-    setAccuracy( Math.round(score / wordsAttempted.length * 100) )
+    setCorrectWords(score)
+    setTimeRemaining(30)
   }
 
   const incrementTimer = () => {
@@ -162,7 +165,7 @@ const App = () => {
       <button disabled={gameOn ? true : false} className="btn" onClick={startGame}>{playCount > 0 ? 'Play Again' : 'Start Game'}</button>
 
       {!gameOn & playCount > 0 &&
-        <h2>You Typed: <span className="red">{wordCount}</span> words with <span>%{accuracy}</span> Accuracy</h2> 
+        <h2 className="result-message">You attempted <span>{wordCount}</span> words and spelled <span>{correctWords}</span> of them correctly!</h2> 
       }
       
 
