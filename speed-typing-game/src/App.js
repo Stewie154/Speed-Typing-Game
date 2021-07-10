@@ -8,10 +8,10 @@ import "aos/dist/aos.css";
 const App = () => {
 
   const textSamples = [
-    "Yo, his palms are sweaty, knees weak, arms are heavy. There's vomit on his sweater already, mom's spaghetti he's nervous. But on the surface he looks calm and ready to drop bombs, but he keeps on forgetting.",
-    "What he wrote down, the whole crowd goes so loud. He opens his mouth but the words won't come out. He's chokin', how everybody's jokin' now. The clock's run out, time's up over bloah.",
-    "Is this the real life? Is this just fantasy? Caught in a landslide, no escape from reality. Open your eyes, Look up to the skies and see.",
-    "I'm just a poor boy, I need no sympathy, because I'm easy come, easy go, little high, little low. Any way the wind blows doesn't really matter to me, to me.",
+      "Yo, his palms are sweaty, knees weak, arms are heavy. There's vomit on his sweater already, mom's spaghetti he's nervous. But on the surface he looks calm and ready to drop bombs, but he keeps on forgetting.",
+      "What he wrote down, the whole crowd goes so loud. He opens his mouth but the words won't come out. He's chokin', how everybody's jokin' now. The clock's run out, time's up over bloah.",
+      "Is this the real life? Is this just fantasy? Caught in a landslide, no escape from reality. Open your eyes, Look up to the skies and see.",
+      "I'm just a poor boy, I need no sympathy, because I'm easy come, easy go, little high, little low. Any way the wind blows doesn't really matter to me, to me.",
     "hello."
    ]
 
@@ -19,7 +19,7 @@ const App = () => {
   const [targetText, setTargetText] = useState(textSamples[Math.floor(Math.random() * textSamples.length)])
   const [wordCount, setWordCount] = useState(0)
   const [correctWords, setCorrectWords] = useState(0)
-  const [timeRemaining, setTimeRemaining] = useState(0)
+  const [timeRemaining, setTimeRemaining] = useState(15)
   const [leftOverTime, setLeftOverTime] = useState(0)
   const [gameOn, setGameOn] = useState(false)
   const [playCount, setPlayCount] = useState(0)
@@ -95,10 +95,14 @@ const App = () => {
     }
     console.log(wordsAttempted.length)
     console.log(score)
+    setGameOn(false)
 
     setWordCount(wordsAttempted.length)
     setCorrectWords(score)
-    setTimeRemaining(30)
+    setTimeout( () => {
+      setTimeRemaining(30)
+    }, 1000)
+    
   }
 
   const incrementTimer = () => {
@@ -114,6 +118,7 @@ const App = () => {
       return
     }
     textAreaRef.current.focus()
+    setLeftOverTime(0)
     setText('')
     setWordCount(0)
     setGameOn(true)
